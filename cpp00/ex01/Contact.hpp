@@ -17,18 +17,26 @@
 #include <iostream>
 #include <string>
 
+/*
+ *private: contact fields of the contact
+ *public:
+    - setContact: Fill contact fields from user input
+    - displayShort: Show summarized info in table format
+    - displayFull: Show full info for one contact
+    - isValid: Check if all fields are filled
+*/
 class Contact {
     private:
         std::string firstName;
         std::string lastName;
-        std::string nickName;
+        std::string nickname;
         std::string phoneNumber;
         std::string darkestSecret;
     
     public:
         void    setContact();
         void    displayShort(int index) const;
-        void    dissplayFull() const;
+        void    displayFull() const;
         void    isValid() const;
 };
 
