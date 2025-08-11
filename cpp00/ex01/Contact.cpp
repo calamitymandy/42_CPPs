@@ -1,7 +1,7 @@
 #include "Contact.hpp"
 #include <iomanip> // For std::setw()
 
-// Ask the user to fill in all contact fields
+/* Ask the user to fill in all contact fields */
 void    Contact::setContact() {
     std::cout << "First Name: ";
     std::getline(std::cin, firstName);
@@ -15,9 +15,10 @@ void    Contact::setContact() {
     std::getline(std::cin, darkestSecret);
 }
 
-// Print summarized info for SEARCH command
-// std::setw(fieldWith) -> sets the width parameter of the stream out or in to exactly `fieldWith`.
-// std::endl -> Inserts a newline character into the output sequence
+/* Print summarized info for SEARCH command
+   std::setw(fieldWith) -> sets the width parameter of the stream out or in to exactly `fieldWith`.
+   std::endl -> Inserts a newline character into the output sequence 
+*/
 
 void    Contact::displayShort(int index) const {
     std::cout << std::setw(10) << index << "|"; // write the index
