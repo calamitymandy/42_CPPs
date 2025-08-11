@@ -53,10 +53,17 @@ void    PhoneBook::searchContact() const {
     int index;
     std::cin >> index;
 
-    // Validate input: must be a number and within range
-    if (std::cin.fail() || index < 0 || index >= contactCount) {
-        std::cin.clear(); // Reset error state
-        std::cin.ignore(std::numeric_limits<std:streamsize::max(), '\n'); // Discard bad input
+    /* Validate input: must be a number and within range
+        if input is not an int or pb reading value std::cin.fail() returns true
+        OR if index < 0 or index > number of contacts:
+        std::cin.clear() resets all error flags making std::cin usable again.
+        std::cin.ignore() flushes the remaining junk in the input buffer up to the next newline \n.
+        std::numeric_limits<std::streamsize>::max() is just a huge number (largest possible streamsize), 
+        ensuring we throw away everything until the newline.
+    */
+    if (std::cin.fail() || index < 0 || index >= contactCount) { 
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std:streamsize::max(), '\n');
         std::cout << "Invalid index" << std::endl;
         return;
     }
@@ -65,5 +72,3 @@ void    PhoneBook::searchContact() const {
     // Remove the newline left in the input buffer for the next getline()
     std::cin.ignore();
 }
-
-//////////////////////////////////////////////// FOLLOW UP FROM HERE ////////////////////////////////////////////////
