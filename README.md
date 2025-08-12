@@ -1,6 +1,7 @@
 # 42_CPPs
 
-## CPP 01
+## CPP 00
+### Ex01:
 
 1. Structure du projet:
 
