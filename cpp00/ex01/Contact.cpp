@@ -1,5 +1,4 @@
 #include "Contact.hpp"
-#include <iomanip> // For std::setw()
 
 /* Ask the user to fill in all contact fields */
 void    Contact::setContact() {

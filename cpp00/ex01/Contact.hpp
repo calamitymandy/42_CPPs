@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amdemuyn <amdemuyn@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: amdemuyn <amdemuyn@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:50:09 by amdemuyn          #+#    #+#             */
-/*   Updated: 2025/03/14 20:03:32 by amdemuyn         ###   ########.fr       */
+/*   Updated: 2025/08/11 18:38:49 by amdemuyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip> // For std::setw()
 
 /*
  *private: contact fields of the contact
@@ -36,7 +37,7 @@ class Contact {
         void    setContact();
         void    displayShort(int index) const;
         void    displayFull() const;
-        void    isValid() const;
+        bool    isValid() const;
 };
 
 #endif
