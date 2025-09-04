@@ -1,7 +1,6 @@
 #include "Zombie.hpp"
 
-/*
- * this->name means "the name attribute of the current object."
+/* this->name means "the name attribute of the current object."
  *
  * Constructor → assigns the zombie’s name.
  * Destructor → prints a message when the zombie is deleted (help tracking heap allocations).
