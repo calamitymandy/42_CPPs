@@ -1,5 +1,10 @@
 #include "Zombie.hpp"
 
+/*
+ * Stack object: automatic storage, destroyed automatically. (not pointer)
+ * Heap object: dynamic storage, survives until you delete it. (pointer)
+ */
+
 int main() {
 
 	// Heap allocation
