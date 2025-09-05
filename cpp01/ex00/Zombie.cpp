@@ -14,8 +14,11 @@ Zombie::Zombie(std::string name) { // PARAMETER: "name"
 
 Zombie::~Zombie() {
     std::cout << this->name << " is destroyed." << std::endl;
+    //this->name = "💀 (invalid)";
 }
 
-void    Zombie::announce(void){
-    std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << strd::endl;
+void    Zombie::announce(void) {
+    if (this->name != "💀 (invalid)") {
+        std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    } 
 }
