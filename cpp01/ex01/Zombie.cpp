@@ -3,11 +3,12 @@
 Zombie::Zombie(void) {}
 
 Zombie::~Zombie(void) {
-    std::cout << this->thename << " is very dead... RIP." << std::endl;
+    std::cout << this->thename << " nº"<< this->theid << " is very dead... RIP 💀" << std::endl;
 }
 
-void Zombie::setName(std::string name) {
+void Zombie::setName(std::string name, int id) {
     this->thename = name;
+    this->theid = id;
 }
 
 void Zombie::announce(void) {

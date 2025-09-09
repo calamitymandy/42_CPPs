@@ -4,7 +4,7 @@ int main() {
     int N = 7;
     int i = 0;
 
-    Zombie* horde = zombieHorde(N, "ZoOoMmbiiiEee")
+    Zombie* horde = zombieHorde(N, "ZoOoMmbiiiEee");
     while (i < N) {
         horde[i].announce();
         i++;
