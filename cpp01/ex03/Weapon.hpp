@@ -18,7 +18,7 @@ class Weapon {
         ~Weapon(void);
 
         const std::string &getType(void) const; // returns a const reference to avoid copies.
-        void setType(std::string &type); // change the weapon's type
+        void setType(const std::string &type); // change the weapon's type
 };
 
 #endif

@@ -7,10 +7,10 @@
 Weapon::Weapon(std::string type) : _type(type) {} // Destructor left empty (no dynamic allocation inside Weapon)
 Weapon::~Weapon(void) {}
 
-const std::string &getType(void) const {
+const std::string &Weapon::getType(void) const {
     return this->_type; // ATTRIBUTE accessed via this->_type
 }
 
-void setType(std::string &type) {
+void Weapon::setType(const std::string &type) {
     this->_type = type; // ATTRIBUTE updated
 }
