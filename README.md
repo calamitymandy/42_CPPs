@@ -21,9 +21,7 @@ It defines four special member functions that together ensure your class behaves
 🧱 Action: calls the default constructor
 🧠 Meaning: we create the first box a, and it starts with _fixedPointValue = 0.
 
-+-----------+
 |  a: 0     |
-+-----------+
 (Default constructor called)
 
 🧩 Step 2 — Fixed b(a);
