@@ -42,6 +42,8 @@ void Harl::complain(std::string level) {
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
     // Iterate to find a match
+    // If the level matches a string, the corresponding function is called 
+    // dynamically with (this->*functions[i])();.
     for (int i = 0; i < 4; i++) {
         if (levels[i] == level) {
             (this->*functions[i])(); // Call the corresponding member function
