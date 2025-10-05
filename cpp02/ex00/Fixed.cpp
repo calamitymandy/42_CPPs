@@ -16,7 +16,10 @@ Fixed::Fixed(const Fixed &other) {
     *this = other;
 }
 
-// Copy assignment operator
+/* Copy assignment operator:
+    - Needed for proper OCF.
+    - Avoids copying onto itself.
+    - Uses getRawBits() for consistency.*/
 Fixed &Fixed::operator=(const Fixed &other) {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other) {
@@ -25,13 +28,13 @@ Fixed &Fixed::operator=(const Fixed &other) {
     return *this;
 }
 
-// Getter
+// Getter -> returns the raw integer value.
 int Fixed::getRawBits(void) const {
     std::cout << "getRawBits member function called" << std::endl;
     return this->_fixedPointValue;
 }
 
-// Setter
+// Setter -> allows manual setting.
 void Fixed::setRawBits(int const raw) {
     std::cout << "setRawBits member function called" << std::endl;
     this->_fixedPointValue = raw;
