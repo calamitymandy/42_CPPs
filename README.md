@@ -21,7 +21,8 @@ It defines four special member functions that together ensure your class behaves
 🧱 Action: calls the default constructor
 🧠 Meaning: we create the first box a, and it starts with _fixedPointValue = 0.
 
-`a: 0`
+`   a: 0    `
+
 (Default constructor called)
 
 🧩 Step 2 — Fixed b(a);
@@ -29,9 +30,9 @@ It defines four special member functions that together ensure your class behaves
 🧱 Action: calls the copy constructor
 🧠 Meaning: we make a new box b that copies the internal value from a.
 
-+-----------+     +-----------+
-|  a: 0     | --> |  b: 0     |
-+-----------+     +-----------+
+
+`   a: 0    ` --> `   b: 0  `
+
 (Copy constructor called)
 
 🧩 Step 3 — Fixed c;
@@ -39,9 +40,11 @@ It defines four special member functions that together ensure your class behaves
 🧱 Action: another default constructor
 🧠 Meaning: we make a third box c, starting empty (value 0).
 
-+-----------+     +-----------+     +-----------+
-|  a: 0     | --> |  b: 0     |     |  c: 0     |
-+-----------+     +-----------+     +-----------+
+
+`   a: 0    ` -->  `    b: 0    ` 
+
+`   c: 0    `
+
 (Default constructor called)
 
 🧩 Step 4 — c = b;
@@ -53,9 +56,9 @@ Before: c = 0
 Copy assignment: c becomes a copy of b (0)
 After: c = 0
 
-+-----------+     +-----------+     +-----------+
-|  a: 0     | --> |  b: 0     | --> |  c: 0     |
-+-----------+     +-----------+     +-----------+
+
+`   a: 0    ` -->  `    b: 0    ` --> `   c: 0    `
+
 (Copy assignment operator called)
 
 🧩 Step 5 — Exiting main()
