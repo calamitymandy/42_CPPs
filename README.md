@@ -66,10 +66,10 @@ After: c = 0
 🧱 Action: calls the destructor three times
 🧠 Meaning: each object goes out of scope in reverse order of creation.
 
-Destroy c
-Destroy b
-Destroy a
+- Destroy c
+- Destroy b
+- Destroy a
 
-Destructor called
-Destructor called
-Destructor called
+- Destructor called
+- Destructor called
+- Destructor called
