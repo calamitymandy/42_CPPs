@@ -1,10 +1,9 @@
-#include "phonebook.hpp"
-#include <limits> // For std::numeric_limits, used to handle invalid input in searchContact()
+#include "PhoneBook.hpp"
 
 // Constructor: initializes the phone book with no contacts
 PhoneBook::PhoneBook() {
     currentIndex = 0; // Position where the next contact will be stored
-    contactCount = 0; // Number of contacts currently stored
+    nbOfContacts = 0; // Number of contacts currently stored
 }
 
 /*add a new contact to the phonebook:
@@ -15,11 +14,11 @@ PhoneBook::PhoneBook() {
                 Move to the next position, wrapping back to 0 after index 7
                 If currentIndex is 7 -> (7+1) % 8 = 0, so currentIndex will be 0 and 9th contact
                 will be stored in 1st position (0)
-    5 - if (contactCount < 8) only increases till 8, as there cannot be more than 8 contacts stored
+    5 - if (nbOfContacts < 8) only increases till 8, as there cannot be more than 8 contacts stored
 */
 void    PhoneBook::addContact() {
     Contact newContact;
-    newContact.SetContact();
+    newContact.setContact();
 
     if (!newContact.isValid()) { 
         std::cout << "Error: Contact information cannot be empty!" << std::endl;
@@ -29,8 +28,8 @@ void    PhoneBook::addContact() {
     contacts[currentIndex] = newContact;
     currentIndex = (currentIndex + 1) % 8;
 
-    if (contactCount < 8)
-        contactCount++;
+    if (nbOfContacts < 8)
+        nbOfContacts++;
 }
 
 /* Display all contacts in a table format, then allow viewing details by index:
@@ -49,7 +48,7 @@ void    PhoneBook::addContact() {
     7 - Remove the newline left in the input buffer for the next getline()
     */
 void    PhoneBook::searchContact() const {
-    if (contactCount == 0) { 
+    if (nbOfContacts == 0) { 
         std::cout << "No contacts in phonebook!" << std::endl;
         return;
     }
@@ -59,17 +58,17 @@ void    PhoneBook::searchContact() const {
               << std::setw(10) << "Last Name" << "|"
               << std::setw(10) << "Nickname" << std::endl;
     
-    for (int i = 0; i < contactCount; i++) {
+    for (int i = 0; i < nbOfContacts; i++) {
         contacts[i].displayShort(i);
     }
 
-    std::cout << "Enter index";
+    std::cout << "Enter index: ";
     int index;
     std::cin >> index;
 
-    if (std::cin.fail() || index < 0 || index >= contactCount) { 
+    if (std::cin.fail() || index < 0 || index >= nbOfContacts) { 
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std:streamsize::max(), '\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Invalid index" << std::endl;
         return;
     }
