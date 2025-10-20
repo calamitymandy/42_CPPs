@@ -13,6 +13,7 @@ class PhoneBook {
     
     public:
         PhoneBook(); // Constructor
+        ~PhoneBook(); // Destructor
         void    addContact(); // ADD command
         void    searchContact() const; // SEARCH command
 };
