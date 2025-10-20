@@ -22,7 +22,6 @@ std::string replaceAll(const std::string &content, const std::string &s1, const 
     return result;
 }
 
-
 int main(int argc, char **argv) {
     if (argc != 4) {
         std::cerr << "Usage: " << argv[0] << " <filename> <s1> <s2>" << std::endl;
@@ -49,6 +48,9 @@ int main(int argc, char **argv) {
             content += "\n"; // add \n to preserve original formatting
     }
     infile.close();
+
+    if (content.empty())
+        std::cerr << "Error: infile is empty" << std::endl;
 
     // Replace occurences
     std::string replaced = replaceAll(content, s1, s2);

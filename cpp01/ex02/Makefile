@@ -3,7 +3,7 @@ NAME = brain
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp
+SRC = main.cpp
 OBJS = $(SRC:.cpp=.o)
 
 all: $(NAME)

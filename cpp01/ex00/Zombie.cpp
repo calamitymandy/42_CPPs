@@ -14,11 +14,9 @@ Zombie::Zombie(std::string name) { // PARAMETER: "name"
 
 Zombie::~Zombie() {
     std::cout << this->name << " is destroyed." << std::endl;
-    //this->name = "💀 (invalid)";
+    //this->name = "💀 (invalid)"; // put this to "show" that stackZombie is destroyed
 }
 
 void    Zombie::announce(void) {
-    if (this->name != "💀 (invalid)") {
         std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-    } 
 }
