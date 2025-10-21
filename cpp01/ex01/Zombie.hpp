@@ -6,14 +6,14 @@
 
 class Zombie {
     private:
-        std::string thename; // Attribute that stores the zombie's name
+        std::string thename;                    // Attribute that stores the zombie's name
         int theid;
 
     public:
-        Zombie();                   // Default constructor (needed for horde)
-        ~Zombie();                  // Destructor (debug message)
-        void setName(std::string name, int id);  // Assign a name to the zombie
-        void announce(void);        // Zombie announces itself
+        Zombie();                               // Default constructor (needed for horde)
+        ~Zombie();                              // Destructor (debug message)
+        void setName(std::string name, int id); // Assign a name to the zombie
+        void announce(void);                    // Zombie announces itself
 };
 
 Zombie* zombieHorde(int N, std::string name); 

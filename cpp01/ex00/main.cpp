@@ -4,7 +4,7 @@
  * Heap object: dynamic storage, survives until you delete it. (pointer)
  */
 
-/*
+
 int main() {
     std::cout << "----------HEAP----------" << std::endl;
     Zombie* heapZombie = newZombie("HeapZombie");
@@ -16,9 +16,9 @@ int main() {
 
     return 0;
 }
-*/
 
 
+/*
 int main() {
 
 	std::cout << "----------HEAP----------" << std::endl;
@@ -37,6 +37,7 @@ int main() {
 	
 	return (0);
 }
+*/
 
 /*
 int main() {
