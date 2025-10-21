@@ -410,3 +410,77 @@ Function called: Fixed::~Fixed() (destructor) for the temporary
 Output "Destructor called" for the temporary.
 
 Why this order: temporaries are created for right-hand expressions and are destroyed after the full-expression (after the assignment completes).
+
+
+🧩 Step 6 — std::cout << "a is " << a << std::endl;
+
+This triggers the insertion operator you defined:
+
+Function called:
+
+operator<<(std::cout, a) — your overload:
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixedNumber) {
+    out << fixedNumber.toFloat();
+    return out;
+}
+
+
+Fixed::toFloat() — called inside operator<<.
+
+What toFloat() does:
+
+float Fixed::toFloat(void) const {
+    return static_cast<float>(_fixedPointValue) / (1 << _fractionalBits);
+}
+
+
+For a: _fixedPointValue = 316008.
+316008 / 256.0f = 1234.4296875 → printed as 1234.43 by stream formatting.
+
+For b: 2560 / 256 = 10.0 → prints 10
+
+For c: 10860 / 256 = 42.421875 → prints 42.4219
+
+For d: 2560 / 256 = 10.0
+
+Key point: toFloat() divides the stored integer by 256.0 to restore the real value.
+
+🧩 Step 7 — toInt() calls like a.toInt()
+
+Function called: Fixed::toInt()
+
+What it does:
+
+int Fixed::toInt(void) const {
+    return _fixedPointValue >> _fractionalBits;
+}
+
+
+For a (316008 >> 8): integer division by 256 truncated toward zero → 1234.
+
+For c (10860 >> 8): 10860 / 256 = 42 (truncated), so integer part 42.
+
+Why shift right: shifting right by 8 is integer division by 2^8 but implemented as a fast bit operation; this discards the fractional bits (no rounding — truncation).
+
+🧩 Step 8 — Program end / destructors order
+
+When main() returns, objects are destroyed in reverse order of creation:
+
+Creation order and corresponding destructors:
+
+a — created first → destroyed last
+
+b — created second → destroyed second-last
+
+c — third → destroyed third-last
+
+d — fourth → destroyed first
+
+So the destructor messages will appear in reverse creation order (depending exactly on how temporaries were created/destroyed earlier).
+
+Each destructor call runs:
+
+Fixed::~Fixed() {
+    std::cout << "Destructor called" << std::endl;
+}

@@ -11,11 +11,11 @@ class Fixed {
     public:
         Fixed();                                // Default constructor
         ~Fixed();                               // Destructor
-        Fixed(const Fixed &other);              // Constructor of copy
-        Fixed &operator=(const Fixed &other);   // assignment operator of copy
+        Fixed(const Fixed &other);              // Copy constructor
+        Fixed &operator=(const Fixed &other);   // Copy assignment operator
 
-        int getRawBits(void) const;         // Returns the raw integer value
-        void setRawBits(int const raw);     // Sets the raw integer value
+        int getRawBits(void) const;             // Returns the raw integer value
+        void setRawBits(int const raw);         // Sets the raw integer value
 };
 
 #endif

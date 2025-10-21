@@ -11,12 +11,12 @@ class Fixed {
         static const int    _fractionalBits = 8;
 
     public:
-    Fixed();
-    ~Fixed();
-    Fixed(const int intValue);
-    Fixed(const float floatValue);
-    Fixed(const Fixed &copy);
-    Fixed &operator=(const Fixed &assignedCopy);
+        Fixed();
+        ~Fixed();
+        Fixed(const int intValue);
+        Fixed(const float floatValue);
+        Fixed(const Fixed &copy);
+        Fixed &operator=(const Fixed &assignedCopy);
 
     int     getRawBits(void) const;
     void    setRawBits(int const raw);
