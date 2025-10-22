@@ -26,7 +26,7 @@ Fixed::Fixed(const float floatValue) {
 
 // ----------------------------- Assignment -----------------------------
 Fixed &Fixed::operator=(const Fixed &assignedCopy) {
-    std::cout << "Copy assignment operator called" << std::endl;
+    //std::cout << "Copy assignment operator called" << std::endl;
     if( this != &assignedCopy) 
         this->_fixedPointValue = assignedCopy.getRawBits();
     return *this;
