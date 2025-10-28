@@ -3,6 +3,17 @@
 
 #include <iostream>
 
+// Define colors
+#define RESET       "\033[0m"
+#define RED         "\033[91m"
+#define GREEN       "\033[92m"
+#define YELLOW      "\033[93m"
+#define ORANGE		"\033[38;5;209m"
+#define CYAN        "\033[96m"
+#define PURPLE      "\033[95m"
+#define GRAY        "\033[90m"
+#define BOLD        "\033[1m"
+
 class ClapTrap {
     private:
         std::string		_name;

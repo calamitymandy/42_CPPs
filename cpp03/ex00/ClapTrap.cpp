@@ -11,16 +11,16 @@
 // ---------- Constructors & Destructor ----------
 
 	ClapTrap::ClapTrap() : _name("No name"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-        std::cout << "Claptrap - default " << _name << " : created" <<std::endl;
+        std::cout << "Claptrap - default " << _name << " created" << std::endl;
     }
 
 	ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-        std::cout << "Claptrap " << _name << " : created" <<std::endl;
+        std::cout << GREEN << "Claptrap " << _name << " created" << RESET << std::endl;
     }
 
 	ClapTrap::ClapTrap(ClapTrap const &copy) {
         *this = copy;
-        std::cout << "Claptrap " << _name << " : copied" <<std::endl;
+        std::cout << "Claptrap " << _name << " copied" << std::endl;
     }
 
 	ClapTrap &ClapTrap::operator=(ClapTrap const &copy) {
@@ -30,38 +30,47 @@
             _energyPoints = copy._energyPoints;
             _attackDamage = copy._attackDamage;
         }
-        std::cout << "Claptrap " << _name << " : assigned" <<std::endl;
+        std::cout << "Claptrap " << _name << " assigned" << std::endl;
         return *this;
     }
 
 	ClapTrap::~ClapTrap() {
-        std::cout << "Claptrap " << _name << " : destroyed" <<std::endl;
+        std::cout << RED << "Claptrap " << _name << " destroyed" << RESET << std::endl;
     }
 
     // ---------- Member Functions ----------
 
     void ClapTrap::attack(const std::string& target) {
         if (_energyPoints <= 0 || _hitPoints <= 0) {
-            std::cout << "Claptrap " << _name << " : has no energy or hit points left to attack" << std::endl;
+            std::cout << GRAY << "Claptrap " << _name << " 💀  has no energy or hit points left to attack" << RESET << std::endl;
             return;
         }
         _energyPoints--;
-        std::cout << "Claptrap " << _name << " attacks " << target << " causing " << _attackDamage << " points of damage!" << std::endl;
+        std::cout << YELLOW << "Claptrap " << _name << " 💥  attacks " << target << " causing " << _attackDamage << " points of damage!" << ORANGE << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
     }
 
     void ClapTrap::takeDamage(unsigned int amount) {
-        _hitPoints -= amount;
-        if (_hitPoints < 0)
+        if (amount >= _hitPoints || _hitPoints <= 0)
             _hitPoints = 0;
-        std::cout << "Claptrap " << _name << " takes " << amount << " points of damage! Remaining HP: " << _hitPoints << std::endl;
+        else
+            _hitPoints -= amount;
+        std::cout << PURPLE << "Claptrap " << _name << " 💔  takes " << amount << " points of damage!" << ORANGE << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
+        if (_hitPoints <= 0) {
+            _hitPoints = 0;
+            std::cout << GRAY << "Claptrap " << _name << " 💀  has died: no hit points left" << RESET << std::endl;
+        }
     }
 
     void ClapTrap::beRepaired(unsigned int amount) {
-        if (_energyPoints <= 0 || _hitPoints <= 0) {
-            std::cout << "Claptrap " << _name << " : has no energy or hit points left to attack" << std::endl;
+        if (_energyPoints <= 0) {
+            std::cout << GRAY << "Claptrap " << _name << " 💀  has no energy left to repair itself" << RESET << std::endl;
+            return;
+        }
+        if (_hitPoints <= 0) {
+            std::cout << GRAY << "Claptrap " << _name << " 💀  is done and beyond repair" << RESET << std::endl;
             return;
         }
         _hitPoints += amount;
         _energyPoints--;
-        std::cout << "Claptrap " << _name << " repairs itself for " << amount << " hit points! Total HP: " << _hitPoints << std::endl;
+        std::cout << CYAN << "Claptrap " << _name << " 🩹  repairs itself for " << amount << " hit points!" << ORANGE << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
     }
