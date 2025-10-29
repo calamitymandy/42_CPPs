@@ -17,10 +17,10 @@ Fixed::Fixed(const Fixed &copy) {
 }
 
 // Copy assignment operator
-// Overload of = operator: defines how Fixed objects behave when we use =.
+// Overload of = operator: defines how Fixed objects behave when we use = (assignment operator).
 Fixed &Fixed::operator=(const Fixed &assignedCopy) {
     std::cout << "Copy assignment operator called" << std::endl;
-    if( this != &assignedCopy) 
+    if (this != &assignedCopy) 
         this->_fixedPointValue = assignedCopy.getRawBits();
     return *this;
 }
@@ -39,6 +39,8 @@ Fixed::Fixed(const int intValue) {
 Fixed::Fixed(const float floatValue) {
     std::cout << "Float constructor called" << std::endl;
     this->_fixedPointValue = roundf(floatValue * (1 << this->_fractionalBits));
+    // We use multiplication instead of bit shifting because you can’t bit-shift floats,
+    // bit-shifts only work on integers.
     // round to nearest integer roundf(42.42 * Compute multiplier 1 << 8 = 256)
     // so: roundf(10859.52) = 10860 and we store: _fixedPointValue = 10860
 }
