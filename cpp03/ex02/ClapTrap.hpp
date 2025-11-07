@@ -13,7 +13,6 @@
 #define CYAN        "\033[96m"
 #define PURPLE      "\033[95m"
 #define LIGHTBLUE	"\033[38;5;220m"
-#define BOLD        "\033[1m"
 
 class ClapTrap {
     protected:								//In C++, a derived class (like ScavTrap) cannot access private members of its base class directly. But it can access members declared as protected.

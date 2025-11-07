@@ -1,6 +1,6 @@
 # 42_CPPs
 
-## CPP 00
+## CPP00
 ### Ex01:
 🧩 1. Error Management
 
@@ -118,9 +118,9 @@ Displays full contact details afterward.
 
 
 
+----------------------------------------------------------------------------------------------------------
 
-
-## CPP 02
+## CPP02
 ### Ex00:
 
 1. OCF stands for Orthodox Canonical Form (also called Canonical Class Form in C++).
@@ -484,3 +484,71 @@ Each destructor call runs:
 Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }
+
+
+
+----------------------------------------------------------------------------------------------------------
+
+## CPP04
+### Ex00:
+
+🧩 Exercise Goal
+
+We implement:
+
+Animal → Base class
+
+Dog and Cat → Derived classes (inherit from Animal)
+
+WrongAnimal and WrongCat → Example of what happens without virtual functions
+
+
+🧠 Theoretical Background
+
+🧬 1. Subtype Polymorphism
+
+Definition:
+
+Subtype polymorphism (also known as runtime polymorphism) allows objects of derived classes to be 
+treated as objects of the base class, while still behaving according to their actual derived type.
+
+
+✅ Example:
+
+Animal* a = new Dog();
+a->makeSound(); // Calls Dog::makeSound(), not Animal::makeSound()
+
+
+This works only if makeSound() is declared virtual in the base class.
+Without virtual, the compiler calls the base class version even if the real object is a Dog.
+
+
+🧩 2. Abstract Classes
+
+An abstract class is a class that cannot be instantiated because it has at least one pure virtual function.
+An abstract class is like a `template` for other classes. You cannot create an object of an abstract class directly,
+because it is incomplete — `it defines what functions exist, but not how they behave`.
+
+virtual void makeSound() const = 0;
+
+
+This means derived classes must implement this function.
+However, in this exercise, Animal is not yet abstract (it will be in ex01).
+
+
+🔗 3. Interfaces
+
+An interface is a `special kind of abstract class that contains only pure virtual functions` (no data members).
+It defines a contract: classes that inherit it `must` implement all its functions.
+
+For example:
+
+class IShape {
+public:
+    virtual void draw() const = 0;
+    virtual ~IShape() {}
+};
+
+
+Any class that inherits from IShape must implement draw().
+In this exercise, we simulate polymorphism via a base class (Animal), not a full interface yet.
