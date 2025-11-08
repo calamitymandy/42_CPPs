@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = claptrap
+NAME = scavtrap
 
 SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -26,7 +26,7 @@ clean:
 	rm -f $(OBJS)
 	@echo "$(RED)🧹 Object files removed"
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 	@echo "$(PURPLE)🧼 Executable removed"
 

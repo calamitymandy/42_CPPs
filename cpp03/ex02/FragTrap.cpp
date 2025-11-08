@@ -30,7 +30,7 @@ FragTrap &FragTrap::operator=(const FragTrap &copy) {
 }
 
 FragTrap::~FragTrap() {
-    std::cout << RED << "FragTrap " << _name << " 💥  exploded and is no more..." << RESET << std::endl;
+    std::cout << RED << "FragTrap " << _name << " 💥 exploded and is no more..." << RESET << std::endl;
 }
 
 // ---------- Member Functions ----------
@@ -41,7 +41,7 @@ void FragTrap::attack(const std::string &target) {
         return;
     }
     _energyPoints--;
-    std::cout << RED << "FragTrap " << _name << " 🤜  punch in the face " << target
+    std::cout << RED << "FragTrap " << _name << " 🤜 punch in the face " << target
               << ", causing " << _attackDamage << " points of damage!" << GRAY
               << " [HP: " << _hitPoints << " - EP: " << _energyPoints << "]"
               << RESET << std::endl;
@@ -49,6 +49,6 @@ void FragTrap::attack(const std::string &target) {
 
 void FragTrap::highFivesGuys(void) {
     std::cout   << GREEN << "FragTrap " << _name
-                << " ✋  requests a BIG high five!  ✋"
+                << " ✋ requests a BIG high five! ✋"
                 << RESET << std::endl;
 }

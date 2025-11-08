@@ -34,7 +34,7 @@ ScavTrap::~ScavTrap() {
 
 void ScavTrap::attack(const std::string &target) {
     if (_energyPoints <= 0 || _hitPoints <= 0) {
-        std::cout << GRAY << "ScavTrap " << _name << " 💀  cannot attack" << RESET << std::endl;
+        std::cout << GRAY << "ScavTrap " << _name << " 💀 cannot attack" << RESET << std::endl;
         return;
     }
     _energyPoints--;
@@ -46,6 +46,6 @@ void ScavTrap::attack(const std::string &target) {
 
 void ScavTrap::guardGate() {
     std::cout << LIGHTBLUE << "ScavTrap " << _name 
-              << " 🛡️  is now in Gate Keeper mode!" 
+              << " 🛡️ is now in Gate Keeper mode!" 
               << RESET << std::endl;
 }

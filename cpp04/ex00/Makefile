@@ -26,7 +26,7 @@ clean:
 	rm -f $(OBJS)
 	@echo "$(RED)🧹 Object files removed"
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 	@echo "$(PURPLE)🧼 Executable removed"
 

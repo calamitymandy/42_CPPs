@@ -21,8 +21,9 @@ int main() {
     Player2.attack("Bob");
     Player2.attack("Bob");
     Player2.attack("Bob");
-    Player2.attack("Bob");
+    //Player2.attack("Bob");
     Player2.beRepaired(1);
+    //Player2.attack("Bob");
     
     std::cout << std::endl;
 

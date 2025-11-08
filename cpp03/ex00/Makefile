@@ -14,7 +14,7 @@ PURPLE = \033[95m
 
 all: $(NAME)
 
-%.o: %.cpp ClapTrap.hpp
+%.o: %.cpp
 	@echo "$(YELLOW) Compiling	$(WHITE)$<"	
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -26,7 +26,7 @@ clean:
 	rm -f $(OBJS)
 	@echo "$(RED)🧹 Object files removed"
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 	@echo "$(PURPLE)🧼 Executable removed"
 

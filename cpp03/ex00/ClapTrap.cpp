@@ -42,11 +42,11 @@
 
     void ClapTrap::attack(const std::string &target) {
         if (_energyPoints <= 0 || _hitPoints <= 0) {
-            std::cout << GRAY << "ClapTrap " << _name << " 💀  has no energy or hit points left to attack" << RESET << std::endl;
+            std::cout << GRAY << "ClapTrap " << _name << " 💀 has no energy or hit points left to attack" << RESET << std::endl;
             return;
         }
         _energyPoints--;
-        std::cout << YELLOW << "ClapTrap " << _name << " 💥  attacks " << target << " causing " << _attackDamage << " points of damage!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
+        std::cout << YELLOW << "ClapTrap " << _name << " 💥 attacks " << target << " causing " << _attackDamage << " points of damage!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
     }
 
     void ClapTrap::takeDamage(unsigned int amount) {
@@ -54,23 +54,23 @@
             _hitPoints = 0;
         else
             _hitPoints -= amount;
-        std::cout << PURPLE << "ClapTrap " << _name << " 💔  takes " << amount << " points of damage!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
+        std::cout << PURPLE << "ClapTrap " << _name << " 💔 takes " << amount << " points of damage!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
         if (_hitPoints <= 0) {
             _hitPoints = 0;
-            std::cout << GRAY << "ClapTrap " << _name << " 💀  has died: no hit points left" << RESET << std::endl;
+            std::cout << GRAY << "ClapTrap " << _name << " 💀 has died: no hit points left" << RESET << std::endl;
         }
     }
 
     void ClapTrap::beRepaired(unsigned int amount) {
         if (_energyPoints <= 0) {
-            std::cout << GRAY << "ClapTrap " << _name << " 💀  has no energy left to repair itself" << RESET << std::endl;
+            std::cout << GRAY << "ClapTrap " << _name << " 💀 has no energy left to repair itself" << RESET << std::endl;
             return;
         }
         if (_hitPoints <= 0) {
-            std::cout << GRAY << "ClapTrap " << _name << " 💀  is done and beyond repair" << RESET << std::endl;
+            std::cout << GRAY << "ClapTrap " << _name << " 💀 is done and beyond repair" << RESET << std::endl;
             return;
         }
         _hitPoints += amount;
         _energyPoints--;
-        std::cout << CYAN << "ClapTrap " << _name << " 🩹  repairs itself for " << amount << " hit points!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
+        std::cout << CYAN << "ClapTrap " << _name << " 🩹 repairs itself for " << amount << " hit points!" << GRAY << "[HP: " << _hitPoints << " - EP: " << _energyPoints << "]" << RESET << std::endl;
     }
