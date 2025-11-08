@@ -12,7 +12,7 @@
 #define GRAY		"\033[38;5;225m"
 #define CYAN        "\033[96m"
 #define PURPLE      "\033[95m"
-#define LIGHTBLUE	"\033[38;5;220m"
+#define ITALIC      "\033[3m"
 
 class Animal {
     protected:

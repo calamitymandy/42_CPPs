@@ -1,3 +1,6 @@
+# Test leaks MACOS:
+# leaks --atExit -- ./polymorphism
+
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = polymorphism
@@ -6,11 +9,11 @@ SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Colors
-GREEN = "\033[92m"
-YELLOW = "\033[93m"
-WHITE = "\033[97m"
-RED = "\033[91m"
-PURPLE = "\033[95m"
+GREEN = \033[92m
+YELLOW = \033[93m
+WHITE = \033[97m
+RED = \033[91m
+PURPLE = \033[95m
 
 all: $(NAME)
 

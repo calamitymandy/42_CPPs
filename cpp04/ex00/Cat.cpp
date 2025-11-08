@@ -2,7 +2,7 @@
 
 Cat::Cat() {
     type = "Cat";
-    std::cout << Grey << "Cat is created!" << RESET << std::endl;
+    std::cout << ORANGE << "Cat is created!" << RESET << std::endl;
 }
 
 Cat::Cat(const Cat &copy) : Animal(copy) {

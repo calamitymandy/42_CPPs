@@ -12,7 +12,7 @@ Animal::Animal(const Animal &copy) {
 
 Animal &Animal::operator=(const Animal &copy) {
     if (this != &copy)
-        type = copy.type
+        type = copy.type;
     std::cout << "Animal assignment operator called" << std::endl;
     return *this;
 }
@@ -26,5 +26,5 @@ std::string Animal::getType() const {
 }
 
 void Animal::makeSound() const {
-    std::cout << ORANGE << "Animal makes a sound, but from which Animal is it?" << RESET << std::endl;
+    std::cout << GRAY << ITALIC << "The animal makes a sound, but from which animal is it?" << RESET << std::endl;
 }
