@@ -5,8 +5,7 @@ WrongAnimal::WrongAnimal() {
     std::cout << "WrongAnimal created" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &copy) {
-    *this = copy;
+WrongAnimal::WrongAnimal(const WrongAnimal &copy) : type(copy.type) {
     std::cout << "WrongAnimal copied" << std::endl;
 }
 

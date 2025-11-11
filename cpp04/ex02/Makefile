@@ -1,11 +1,11 @@
 # Test leaks MACOS:
-# leaks --atExit -- ./fragtrap
+# leaks --atExit -- ./abstract
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = fragtrap
+NAME = abstract
 
-SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRCS = main.cpp AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp 
 OBJS = $(SRCS:.cpp=.o)
 
 # Colors
@@ -17,21 +17,21 @@ PURPLE = \033[95m
 
 all: $(NAME)
 
-%.o: %.cpp ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
+%.o: %.cpp 
 	@echo "$(YELLOW) Compiling	$(WHITE)$<"	
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-	@echo "\n$(GREEN)✅ Program compiled successfully: $(NAME)\n"
+	@echo "\n$(GREEN)✅ Program compiled successfully: $(NAME) $(WHITE)\n"
 
 clean:
 	rm -f $(OBJS)
-	@echo "$(RED)🧹 Object files removed"
+	@echo "$(RED)🧹 Object files removed $(WHITE)"
 
 fclean: clean
 	rm -f $(NAME)
-	@echo "$(PURPLE)🧼 Executable removed"
+	@echo "$(PURPLE)🧼 Executable removed $(WHITE)"
 
 re: fclean all
 

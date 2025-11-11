@@ -1,19 +1,16 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 int main() {
 
-    std::cout << "=== ONLY ANIMAL ===" << std::endl;
-    const Animal *a = new Animal();
-    a->makeSound();
-    delete a; // If we don't delete we have a leak
+    // ❌ THIS WOULD GIVE COMPILATION ERROR AS EXPECTED
+    // const AAnimal *a = new AAnimal();
 
     // Subtype Polymorphism: Base pointer calls derived behavior like:
     // Animal *a = new Dog(); a->makeSound();
-    std::cout << std::endl;
-    std::cout << "=== CREATING & USING ANIMAL, CAT, DOG OBJECTS ===" << std::endl;
-    const Animal* animals[6];
+    std::cout << "=== CREATING & USING AAnimal, CAT, DOG OBJECTS ===" << std::endl;
+    const AAnimal *animals[6];
     for (int i = 0; i < 2; i++) animals[i] = new Dog();
     for (int i = 2; i < 6; i++) animals[i] = new Cat();
     for (int i = 0; i < 6; i++) {
@@ -25,14 +22,16 @@ int main() {
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "=== COPY CONSTRUCTOR & ASIGNMENT OPERATOR ===" << std::endl;
-    Dog basic;
-    {
-        Dog tmp = basic; // This should invoke the copy constructor
-        tmp.setIdea(0, "Chase the mailman!");
-        std::cout << "After copying, tmp's type: " << tmp.getType() << std::endl;
-        tmp.makeSound();
-        std::cout << "tmp idea[0]: " << tmp.getIdea(0) << std::endl;
-    } // tmp goes out of scope here, should delete its own Brain
+	{
+		Dog basic;
+		{
+			Dog tmp = basic; // This should invoke the copy constructor
+			tmp.setIdea(0, "Chase the mailman!");
+			std::cout << "After copying, tmp's type: " << tmp.getType() << std::endl;
+			tmp.makeSound();
+			std::cout << "tmp idea[0]: " << tmp.getIdea(0) << std::endl;
+		} // tmp goes out of scope here, should delete its own Brain
+	}
     
     std::cout << std::endl;
     std::cout << std::endl;

@@ -5,8 +5,7 @@ Animal::Animal() {
     std::cout << GREEN << "Animal is created!" << RESET << std::endl;
 }
 
-Animal::Animal(const Animal &copy) {
-    *this = copy;
+Animal::Animal(const Animal &copy) : type(copy.type) {
     std::cout << "Animal is copied" << std::endl;
 }
 

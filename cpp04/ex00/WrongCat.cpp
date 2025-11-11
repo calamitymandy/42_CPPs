@@ -6,13 +6,12 @@ WrongCat::WrongCat() {
 }
 
 WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy) {
-    *this = copy;
     std::cout << "WrongCat copied" << std::endl;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &copy) {
     if (this != &copy)
-        type = copy.type;
+        WrongAnimal::operator=(copy);
     std::cout << "WrongCat assignement operator called" << std::endl;
     return *this;
 }
@@ -20,7 +19,6 @@ WrongCat &WrongCat::operator=(const WrongCat &copy) {
 WrongCat::~WrongCat() {
     std::cout << "WrongCat destroyed" << std::endl;
 }
-
 
 void WrongCat::makeSound() const {
     std::cout << "We'll never hear that sound" << std::endl;

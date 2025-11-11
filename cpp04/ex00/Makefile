@@ -23,15 +23,15 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-	@echo "\n$(GREEN)✅ Program compiled successfully: $(NAME)\n"
+	@echo "\n$(GREEN)✅ Program compiled successfully: $(NAME) $(WHITE)\n"
 
 clean:
 	rm -f $(OBJS)
-	@echo "$(RED)🧹 Object files removed"
+	@echo "$(RED)🧹 Object files removed $(WHITE)"
 
 fclean: clean
 	rm -f $(NAME)
-	@echo "$(PURPLE)🧼 Executable removed"
+	@echo "$(PURPLE)🧼 Executable removed $(WHITE)"
 
 re: fclean all
 

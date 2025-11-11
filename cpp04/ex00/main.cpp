@@ -7,6 +7,7 @@
 int main() {
     std::cout << std::endl << "=== CORRECT POLYMORPHISM ===" << std::endl;
     const Animal *meta = new Animal();
+    std::cout << meta->getType() << " says: " << std::endl;
     meta->makeSound();
     delete meta;
     std::cout << std::endl;
@@ -21,8 +22,17 @@ int main() {
     std::cout << cat->getType() << " says: " << std::endl;
     cat->makeSound();
     delete cat;
-    std::cout << std::endl;
 
+    std::cout << std::endl << "=== CORRECT POLYMORPHISM: POINTER ARRAY ===" << std::endl;
+    Animal  *animals[3];
+    animals[0] = new Dog();
+    animals[1] = new Cat();
+    animals[2] = new Animal();
+
+    for (int i = 0; i < 3; i++) {
+        animals[i]->makeSound();
+        delete animals[i];
+    }
 
     /*When you delete an object through a pointer to the base class, C++ looks up 
     which destructor to call using polymorphism.
