@@ -15,7 +15,7 @@ Dog &Dog::operator=(const Dog &copy) {
 	if (this != &copy) {
 		Animal::operator=(copy);
 		delete brain;								// Avoid memory leak — delete old brain
-		brain = new Brain(*copy.brain);				// Deep copy new Brain
+		brain = new Brain(*copy.brain);				// Deep copy new Brain 
 	}
 	std::cout << "Dog assignment operator called" << std::endl;
 	return *this;

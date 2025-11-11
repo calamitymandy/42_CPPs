@@ -25,6 +25,10 @@ int main() {
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "=== COPY CONSTRUCTOR & ASIGNMENT OPERATOR ===" << std::endl;
+    /** if the copy were shallow, both basic and tmp would point to the same Brain.
+    When tmp is destroyed, its destructor would delete the Brain. Then, when basic 
+    is destroyed, it would try to delete the same Brain again — causing a 
+    double free or crash. */
     Dog basic;
     {
         Dog tmp = basic; // This should invoke the copy constructor
@@ -42,7 +46,7 @@ int main() {
     dog1.setIdea(0, "Chase the mailman!");
     dog1.setIdea(1, "Eat bones!");
 
-    Dog dog2 = dog1;  // Deep copy
+    Dog dog2 = dog1;  // Deep copy 
     std::cout << "Dog2 idea[0]: " << dog2.getIdea(0) << std::endl;
 
     std::cout << "--- We change Dog2 idea[0] to: Sleep all day ---" << std::endl;

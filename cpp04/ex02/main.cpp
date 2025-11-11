@@ -4,7 +4,10 @@
 
 int main() {
 
-    // ❌ THIS WOULD GIVE COMPILATION ERROR AS EXPECTED
+	// In ex02, makeSound() is pure virtual, so Animal becomes abstract.
+	// In ex01, it was just virtual, so Animal could still be instantiated.
+    
+	// ❌ THIS WOULD GIVE COMPILATION ERROR AS EXPECTED
     // const AAnimal *a = new AAnimal();
 
     // Subtype Polymorphism: Base pointer calls derived behavior like:

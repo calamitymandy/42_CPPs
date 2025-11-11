@@ -552,3 +552,36 @@ public:
 
 Any class that inherits from IShape must implement draw().
 In this exercise, we simulate polymorphism via a base class (Animal), not a full interface yet.
+
+---------------
+
+Why must makeSound() and the destructor be virtual?
+
+When you use a base class pointer (like Animal*) to refer to a derived object (like Dog or Cat), C++ needs to know which version of a function or destructor to call.
+
+If the function or destructor is marked virtual, C++ looks at the actual type of the object at runtime — not just the pointer type — and calls the correct derived version.
+
+So:
+
+A virtual destructor ensures that when you call delete on an Animal* pointing to a Dog, both the Dog destructor and the Animal destructor run (in the right order).
+
+A virtual function like makeSound() ensures that the Dog or Cat version runs, not the base Animal one.
+
+Without virtual, only the base class version would run, which could cause incorrect behavior or memory leaks.
+
+
+
+What happens in the WrongAnimal example?
+
+In WrongAnimal, the makeSound() function is not virtual.
+That means the compiler decides at compile time which function to call, based on the pointer type, not the actual object type.
+
+So even if you have this:
+
+WrongAnimal* wrongCat = new WrongCat();
+wrongCat->makeSound();
+
+
+C++ sees wrongCat as a WrongAnimal* and therefore calls WrongAnimal::makeSound(), not WrongCat::makeSound().
+
+That’s why we say it’s “wrong polymorphism” — because it doesn’t behave dynamically.
