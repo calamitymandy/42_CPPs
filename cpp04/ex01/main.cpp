@@ -29,7 +29,7 @@ int main() {
     When tmp is destroyed, its destructor would delete the Brain. Then, when basic 
     is destroyed, it would try to delete the same Brain again — causing a 
     double free or crash. */
-    Dog basic;
+    Dog basic; // THIS IS DELETED AT THE END
     {
         Dog tmp = basic; // This should invoke the copy constructor
         tmp.setIdea(0, "Chase the mailman!");
@@ -46,7 +46,7 @@ int main() {
     dog1.setIdea(0, "Chase the mailman!");
     dog1.setIdea(1, "Eat bones!");
 
-    Dog dog2 = dog1;  // Deep copy 
+    Dog dog2 = dog1;  // Deep copy // THOSE TWO DELETED AT THE END
     std::cout << "Dog2 idea[0]: " << dog2.getIdea(0) << std::endl;
 
     std::cout << "--- We change Dog2 idea[0] to: Sleep all day ---" << std::endl;
