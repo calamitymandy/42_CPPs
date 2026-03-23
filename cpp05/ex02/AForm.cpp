@@ -43,6 +43,8 @@ void AForm::execute(Bureaucrat const &executor) const {
         throw FormNotSignedException();
     if (executor.getGrade() > _gradeToExecute)
         throw GradeTooLowException();
+    
+    executeAction();
 }
 
 /* ================= EXCEPTIONS ================= */
@@ -57,10 +59,10 @@ const char *AForm::FormNotSignedException::what() const throw() {
 }
 
 /* ================= OPERATOR ================= */
-std::ostream &operator<<(std::ostream &os, const AForm &AForm) {
-    os  << "Form " << AForm.getName()
-        << " -> signed: " << (AForm.getIsSigned() ? "yes" : "no")
-        << " - grade to sign: " << AForm.getGradeToSign()
-        << " - grade to execute: " << AForm.getGradeToExecute();
+std::ostream &operator<<(std::ostream &os, const AForm &form) {
+    os  << "Form " << form.getName()
+        << " -> signed: " << (form.getIsSigned() ? "yes" : "no")
+        << " - grade to sign: " << form.getGradeToSign()
+        << " - grade to execute: " << form.getGradeToExecute();
     return os;
 }
