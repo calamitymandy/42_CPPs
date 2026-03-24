@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 
 /* ================= CONSTRUCTORS, ASSIGNMENT & DESTRUCTOR ================= */
 
@@ -43,7 +43,7 @@ void    Bureaucrat::decrementGrade() {
     _grade++;
 }
 
-void Bureaucrat::signForm(AForm &form) const {
+void Bureaucrat::signForm(Form &form) const {
     try
     {
         form.beSigned(*this);

@@ -1,5 +1,46 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include <cstdlib>
+#include <ctime>
+
+/*
+** ===================== EX02 SUMMARY =====================
+** Polymorphism and proper OOP design: Form becomes AForm (Abstract Form):
+**    - Avoids code duplication
+**    - Centralizes validation logic in AForm
+**    - Delegates specific behavior to derived classes
+**
+** We now have multiple types of forms with different behaviors.
+** The base class should not be instantiated, only used as a common interface.
+**
+** Key concepts:
+**
+** 1. Abstract Classes:
+**    - AForm contains a pure virtual function:
+**          virtual void executeAction() const = 0;
+**    - This makes AForm abstract (cannot instantiate it).
+**
+** 2. Inheritance:
+**    - Concrete forms inherit from AForm:
+**          ShrubberyCreationForm, RobotomyRequestForm, PresidentialPardonForm
+**
+** 3. Polymorphism:
+**    - Using AForm pointers/references allows calling different behaviors:
+**          AForm* f = new RobotomyRequestForm("target");
+**          f->execute(bureaucrat);
+**
+** 4. Template Method Pattern:
+**    - AForm::execute() handles:
+**          - checking if the form is signed
+**          - checking executor grade
+**    - Then calls:
+**          executeAction()
+**    - The derived classes implement only the specific action.
+**
+** ========================================================
+*/
 
 int main() {
     try
@@ -43,24 +84,32 @@ int main() {
         std::cout << "Exception caught: " << error.what() << std::endl;
     }
 
-    std::cout << "-----------FORM TESTING-----------" << std::endl;
+    std::cout << "-----------TESTING EX02 AForm-----------" << std::endl;
+    std::srand(std::time(0));
+    try
+    {
+        Bureaucrat gina("Gina", 1);
+        Bureaucrat helen("Helen", 150);
 
-    Bureaucrat doula("Doula", 31);
-    Bureaucrat elo("Elo", 1);
-    Bureaucrat fiona("Fiona", 2);
+        ShrubberyCreationForm shrub("home");
+        RobotomyRequestForm robot("Tiny Tin");
+        PresidentialPardonForm pardon("Jane Doe");
 
-    Form formOne("Form1", 30, 10);
+        helen.signForm(shrub);
+        gina.signForm(shrub);
 
-    doula.signForm(formOne); // should fail
-    std::cout << formOne << std::endl;
-    std::cout << "----------------------" << std::endl;
+        gina.executeForm(shrub);
 
-    elo.signForm(formOne); //should succeed
-    std::cout << formOne << std::endl;
-    std::cout << "----------------------" << std::endl;
+        gina.signForm(robot);
+        gina.executeForm(robot);
 
-    fiona.signForm(formOne); //should succeed
-    std::cout << formOne << std::endl;
+        gina.signForm(pardon);
+        gina.executeForm(pardon);
+    }
+    catch (std::exception &error)
+    {
+        std::cout << "Exception caught: " << error.what() << std::endl;
+    }
 
     return (0);
 }

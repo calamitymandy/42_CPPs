@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 /* ================= CONSTRUCTORS, ASSIGNMENT & DESTRUCTOR ================= */
 
@@ -43,7 +43,7 @@ void    Bureaucrat::decrementGrade() {
     _grade++;
 }
 
-void Bureaucrat::signForm(Form &form) const {
+void Bureaucrat::signForm(AForm &form) const {
     try
     {
         form.beSigned(*this);
@@ -52,6 +52,22 @@ void Bureaucrat::signForm(Form &form) const {
     catch (std::exception &error)
     {
         std::cout   << _name << " couldn't sign "
+                    << form.getName()
+                    << " because "
+                    << error.what()
+                    << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(AForm const &form) const {
+    try
+    {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() <<std::endl;
+    }
+    catch (std::exception &error)
+    {
+        std::cout   << _name << " couldn't execute "
                     << form.getName()
                     << " because "
                     << error.what()
