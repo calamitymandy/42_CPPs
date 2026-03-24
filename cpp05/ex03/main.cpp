@@ -5,43 +5,6 @@
 #include <cstdlib>
 #include <ctime>
 
-/*
-** ===================== EX02 SUMMARY =====================
-** Polymorphism and proper OOP design: Form becomes AForm (Abstract Form):
-**    - Avoids code duplication
-**    - Centralizes validation logic in AForm
-**    - Delegates specific behavior to derived classes
-**
-** We now have multiple types of forms with different behaviors.
-** The base class should not be instantiated, only used as a common interface.
-**
-** Key concepts:
-**
-** 1. Abstract Classes:
-**    - AForm contains a pure virtual function:
-**          virtual void executeAction() const = 0;
-**    - This makes AForm abstract (cannot instantiate it).
-**
-** 2. Inheritance:
-**    - Concrete forms inherit from AForm:
-**          ShrubberyCreationForm, RobotomyRequestForm, PresidentialPardonForm
-**
-** 3. Polymorphism:
-**    - Using AForm pointers/references allows calling different behaviors:
-**          AForm* f = new RobotomyRequestForm("target");
-**          f->execute(bureaucrat);
-**
-** 4. Template Method Pattern:
-**    - AForm::execute() handles:
-**          - checking if the form is signed
-**          - checking executor grade
-**    - Then calls:
-**          executeAction()
-**    - The derived classes implement only the specific action.
-**
-** ========================================================
-*/
-
 int main() {
     try
     {

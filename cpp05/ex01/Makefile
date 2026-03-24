@@ -1,5 +1,5 @@
 # Test leaks MACOS:
-# leaks --atExit -- ./polymorphism
+# leaks --atExit -- ./bureaucrat
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
