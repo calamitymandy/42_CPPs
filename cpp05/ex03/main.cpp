@@ -2,97 +2,74 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-#include <cstdlib>
+#include <iostream>
 #include <ctime>
+#include "Intern.hpp"
 
 int main() {
-    try
-    {
-        Bureaucrat alba("Alba", 2);
-        std::cout << alba << std::endl;
 
-        alba.incrementGrade();
-        std::cout << alba << std::endl;
-
-        alba.incrementGrade(); //should throw
-    }
-    catch(const std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << '\n';
-    }
-
-    std::cout << "----------------------" << std::endl;
-
-    try
-    {
-        Bureaucrat bella("Bella", 151);  // invalid grade
-        std::cout << bella << std::endl; // this will not show bc of invalid grade at start
-    }
-    catch(const std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << '\n';
-    }   
-
-    std::cout << "----------------------" << std::endl;
-
-    try
-    {
-        Bureaucrat celia("Celia", 150);
-        std::cout << celia << std::endl;
-
-        celia.decrementGrade(); //should throw
-    }
-    catch (std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << std::endl;
-    }
-
-    std::cout << std::endl;
-    std::cout << "-----------TESTING EX02 AForm-----------" << std::endl;
+    std::cout << "-----------TESTING EX03 Intern makeForm-----------" << std::endl;
     std::cout << std::endl;
 
     std::srand(std::time(0));
 
     try
     {
-        Bureaucrat gina("Gina", 1);
-        Bureaucrat helen("Helen", 46);
-        Bureaucrat ines("Ines", 150);
+        std::cout << "-----------Creation Intern-----------" << std::endl;
+        Intern bestIntern;
 
-        ShrubberyCreationForm shrub("home");
-        RobotomyRequestForm robot("Tiny Tin");
-        PresidentialPardonForm pardon("Jane Doe");
+        std::cout << "-----------makeForm-----------" << std::endl;
+        AForm *shrubForm = bestIntern.makeForm("shrubbery creation", "Alpha");
+        AForm *robotForm = bestIntern.makeForm("robotomy request", "Beta");
+        AForm *pardonForm = bestIntern.makeForm("presidential pardon", "Gamma");
+        AForm *invalidForm = bestIntern.makeForm("unknown form", "Delta");
 
-        std::cout << "-----------Ines LOW grade-----------" << std::endl;
+        std::cout << "-----------Signing and executing-----------" << std::endl;
 
-        ines.signForm(shrub);
+        Bureaucrat jules("Jules", 1);
+        Bureaucrat kenya("Kenya", 36);
 
-        std::cout << "-----------Helen MEDIUM grade-----------" << std::endl;
-        
-        helen.signForm(shrub);
-        helen.executeForm(shrub);
+        std::cout << "-----------Jules Grade 1-----------" << std::endl;
+        jules.signForm(*shrubForm);
+        jules.executeForm(*shrubForm);
 
-        helen.signForm(robot);
-        helen.executeForm(robot);
+        jules.signForm(*robotForm);
+        jules.executeForm(*robotForm);
 
-        helen.signForm(pardon);
-        helen.executeForm(pardon);
+        jules.signForm(*pardonForm);
+        jules.executeForm(*pardonForm);
 
-        std::cout << "-----------Gina HIGH grade-----------" << std::endl;
+        if (invalidForm)
+        {
+            jules.signForm(*invalidForm);
+            jules.executeForm(*invalidForm);
+        }
 
-        gina.signForm(shrub);
-        gina.executeForm(shrub);
+        std::cout << "-----------Kenya Grade 36-----------" << std::endl;
+        kenya.signForm(*shrubForm);
+        kenya.executeForm(*shrubForm);
 
-        gina.signForm(robot);
-        gina.executeForm(robot);
+        kenya.signForm(*robotForm);
+        kenya.executeForm(*robotForm);
 
-        gina.signForm(pardon);
-        gina.executeForm(pardon);
+        kenya.signForm(*pardonForm);
+        kenya.executeForm(*pardonForm);
+
+        if (invalidForm)
+        {
+            kenya.signForm(*invalidForm);
+            kenya.executeForm(*invalidForm);
+        }
+
+        delete shrubForm;
+        delete robotForm;
+        delete pardonForm;
+        delete invalidForm;
+
     }
     catch (std::exception &error)
     {
         std::cout << "Exception caught: " << error.what() << std::endl;
     }
-
     return (0);
 }
