@@ -43,48 +43,7 @@
 */
 
 int main() {
-    try
-    {
-        Bureaucrat alba("Alba", 2);
-        std::cout << alba << std::endl;
 
-        alba.incrementGrade();
-        std::cout << alba << std::endl;
-
-        alba.incrementGrade(); //should throw
-    }
-    catch(const std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << '\n';
-    }
-
-    std::cout << "----------------------" << std::endl;
-
-    try
-    {
-        Bureaucrat bella("Bella", 151);  // invalid grade
-        std::cout << bella << std::endl; // this will not show bc of invalid grade at start
-    }
-    catch(const std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << '\n';
-    }   
-
-    std::cout << "----------------------" << std::endl;
-
-    try
-    {
-        Bureaucrat celia("Celia", 150);
-        std::cout << celia << std::endl;
-
-        celia.decrementGrade(); //should throw
-    }
-    catch (std::exception &error)
-    {
-        std::cout << "Exception caught: " << error.what() << std::endl;
-    }
-
-    std::cout << std::endl;
     std::cout << "-----------TESTING EX02 AForm-----------" << std::endl;
     std::cout << std::endl;
 
@@ -113,7 +72,7 @@ int main() {
         helen.executeForm(robot);
 
         helen.signForm(pardon);
-        helen.executeForm(pardon);
+        helen.executeForm(pardon); // should fail bc not signed previously
 
         std::cout << "-----------Gina HIGH grade-----------" << std::endl;
 
@@ -122,6 +81,8 @@ int main() {
 
         gina.signForm(robot);
         gina.executeForm(robot);
+
+        //gina.incrementGrade();
 
         gina.signForm(pardon);
         gina.executeForm(pardon);
