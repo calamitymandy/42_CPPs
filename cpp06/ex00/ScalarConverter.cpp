@@ -5,13 +5,11 @@
 #include <cctype>
 #include <cmath>
 
-/* 
- *Detect the type from a string
+/* Detect the type from a string
  * Parse it correctly
  * Convert to all 4 types
  * Handle edge cases properly
- * Print EXACT format 
- */
+ * Print EXACT format */
 
 // Orthodox Canonical Form (empty because class is static-only)
 ScalarConverter::ScalarConverter() {}
@@ -35,9 +33,20 @@ static bool isPseudoLiteral(const std::string &str) {
 /* Static utility designed to determine if a given string represents 
 a single character that is not a digit. It checks two conditions: 
 first, that the string length is exactly 1 (ensuring it's a single character), 
-and second, that the character is not a digit */
-static bool isChar(const std::string &str) {
-    return (str.length() == 1 && !std::isdigit(str[0]));
+and second, that the character is not a digit, then handles the case of + 
+or - without single quotes */
+static bool isChar(const std::string& str)
+{
+    if (str.length() != 1)
+        return false;
+
+    if (std::isdigit(str[0]))
+        return false;
+
+    if (str[0] == '+' || str[0] == '-')
+        return false;
+
+    return true;
 }
 
 /* Static utility that determines if a given string represents a valid integer, 
@@ -46,8 +55,12 @@ distinguishing integers from floats or characters, ensuring accurate type
 detection during parsing. */
 static bool isInt(const std::string &str) {
     size_t i = 0;
+    if (str.empty())
+        return false;
     if (str[i] == '+' || str[i] == '-')
         i++;
+    if (i >= str.length())
+        return false;
     for (; i < str.length(); i++) {
         if (!std::isdigit(str[i]))
             return false;
@@ -64,24 +77,35 @@ If the last character is not f, it returns false.
 Then it scans the characters before the final f, allowing an optional leading + or - sign, 
 and requires all remaining characters to be digits or a single decimal point. 
 The local flag hasDot ensures that exactly one dot appears. */
-static bool isFloat(const std::string &str) {
+static bool isFloat(const std::string& str)
+{
     if (str == "nanf" || str == "+inff" || str == "-inff")
         return true;
-    if (str[str.length() - 1] != 'f')
+    if (str.length() < 2 || str[str.length() - 1] != 'f')
         return false;
+
     bool hasDot = false;
+    bool hasDigit = false;
     size_t i = 0;
+
     if (str[i] == '+' || str[i] == '-')
         i++;
-    for (; i < str.length() - 1; i++) {
-        if (str[i] == '.') {
+    if (i >= str.length() - 1)
+        return false;
+    for (; i < str.length() - 1; i++)
+    {
+        if (str[i] == '.')
+        {
             if (hasDot)
                 return false;
             hasDot = true;
-        } else if (!std::isdigit(str[i]))
+        }
+        else if (std::isdigit(str[i]))
+            hasDigit = true;
+        else
             return false;
     }
-    return hasDot;
+    return (hasDot && hasDigit);
 }
 
 /* static helper that checks whether a string represents a valid double literal 
@@ -92,22 +116,35 @@ For ordinary numeric strings, it first allows an optional leading + or - sign.
 Then it scans every remaining character, requiring digits or a single decimal point. 
 The local hasDot flag ensures only one dot is allowed.
 */
-static bool isDouble(const std::string &str) {
+static bool isDouble(const std::string& str)
+{
     if (str == "nan" || str == "+inf" || str == "-inf")
         return true;
+
     bool hasDot = false;
+    bool hasDigit = false;
     size_t i = 0;
+
+    if (str.empty())
+        return false;
     if (str[i] == '+' || str[i] == '-')
         i++;
-    for (; i < str.length(); i++) {
-        if (str[i] == '.') {
+    if (i >= str.length())
+        return false;
+    for (; i < str.length(); i++)
+    {
+        if (str[i] == '.')
+        {
             if (hasDot)
                 return false;
             hasDot = true;
-        } else if (!std::isdigit(str[i]))
+        }
+        else if (std::isdigit(str[i]))
+            hasDigit = true;
+        else
             return false;
     }
-    return hasDot;
+    return (hasDot && hasDigit);
 }
 
 // ---------- PRINT FUNCTIONS ----------
@@ -169,19 +206,29 @@ static void printFloat(double value)
 {
     std::cout << "float: ";
 
-    float f = static_cast<float>(value);
-
-    if (std::isnan(f))
-        std::cout << "nanf\n";
-    else if (std::isinf(f))
-        std::cout << (f > 0 ? "+inff\n" : "-inff\n");
-    else
+    if (std::isnan(value))
     {
-        std::cout << f;
-        if (f == static_cast<int>(f))
-            std::cout << ".0";
-        std::cout << "f\n";
+        std::cout << "nanf\n";
+        return;
     }
+
+    if (value > std::numeric_limits<float>::max())
+    {
+        std::cout << "+inff\n";
+        return;
+    }
+
+    if (value < -std::numeric_limits<float>::max())
+    {
+        std::cout << "-inff\n";
+        return;
+    }
+
+    float f = static_cast<float>(value);
+    std::cout << f;
+    if (f == static_cast<int>(f))
+        std::cout << ".0";
+    std::cout << "f\n";
 }
 /* Static utility that outputs the double representation of a given double value. 
 It checks if the value is NaN (Not a Number) with std::isnan(value), 
@@ -213,7 +260,7 @@ void ScalarConverter::convert(const std::string &input) {
 
     if (isChar(input))
         value = static_cast<double>(input[0]);
-    else if (isPseudoLiteral(input) || isInt(input) || isFloat(input) || isDouble(input))
+    else if (isInt(input) || isFloat(input) || isDouble(input) || isPseudoLiteral(input))
         value = std::strtod(input.c_str(), NULL);
     else {
         std::cout << "char: impossible\n";
