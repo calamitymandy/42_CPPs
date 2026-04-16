@@ -1,11 +1,11 @@
 # Test leaks MACOS:
-# leaks --atExit -- ./convert
+# leaks --atExit -- ./serialize
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = convert
+NAME = serialize
 
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp Serializer.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Colors
