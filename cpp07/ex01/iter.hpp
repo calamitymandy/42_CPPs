@@ -1,0 +1,26 @@
+#ifndef ITER_HPP
+#define ITER_HPP
+
+#include <cstddef> // for size_t
+
+// NON-CONST array version
+template <typename T>
+void iter(T *array, const size_t length, void(*func)(T &)) {
+    if (!array || !func)
+        return ;
+    for (size_t i = 0; i < length; i++) {
+        func(array[i]);
+    }
+}
+
+// CONST array version
+template <typename T>
+void iter(const T *array, const size_t length, void(*func)(const T &)) {
+    if (!array || !func)
+        return ;
+    for (size_t i = 0; i < length; i++) {
+        func(array[i]);
+    }
+}
+
+#endif
