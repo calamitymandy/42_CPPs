@@ -8,8 +8,6 @@
 
 /* We need to identify the real type of an object at runtime (WITHOUT using typeid)
 So we use: dynamic_cast
-
-
 */
 
 int main() {
