@@ -59,7 +59,7 @@ class Array {
         }
 
         // BOUNDARY CHECKING
-        //Handles: overflow index & negative index (via unsigned)
+        // Handles overflow index & negative index (via unsigned)
 
         // Subscript operator
         T &operator[](unsigned int index) {

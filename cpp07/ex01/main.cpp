@@ -54,3 +54,17 @@ int main(void) {
 
     return 0;
 }
+
+/*
+int main() {
+  int tab[] = { 0, 1, 2, 3, 4 };
+  Awesome tab2[5];
+
+  const int len = 5;
+
+  iter( tab, len, print<const int> );
+  iter( tab2, len, print<Awesome> );
+
+  return 0;
+}
+*/
