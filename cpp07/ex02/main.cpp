@@ -2,7 +2,8 @@
 #include <Array.hpp>
 
 #define MAX_VAL 750
-int main(int, char**)
+
+/*int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
@@ -49,5 +50,37 @@ int main(int, char**)
         numbers[i] = rand();
     }
     delete [] mirror;//
+    return 0;
+}
+*/
+
+int main()
+{
+    Array<int> a(5);
+
+    for (unsigned int i = 0; i < a.size(); i++)
+        a[i] = i * 10;
+
+    std::cout << "Original array:" << std::endl;
+    for (unsigned int i = 0; i < a.size(); i++)
+        std::cout << a[i] << std::endl;
+
+    std::cout << "\nCopy test:" << std::endl;
+    Array<int> b = a;
+    b[0] = 999;
+
+    std::cout << "a[0] = " << a[0] << std::endl;
+    std::cout << "b[0] = " << b[0] << std::endl;
+
+    std::cout << "\nOut of bounds test:" << std::endl;
+    try
+    {
+        std::cout << a[10] << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Exception caught!" << std::endl;
+    }
+
     return 0;
 }
