@@ -48,7 +48,7 @@ int main(void) {
     double d2 = -5.555;
     
     ::swap( d1, d2 );
-    std::cout << "d1 = " << a << ", d2 = " << b << std::endl;
+    std::cout << "d1 = " << d1 << ", d2 = " << d2 << std::endl;
     std::cout << "min(d1, d2) = " << ::min( d1, d2 ) << std::endl;
     std::cout << "max(d1, d2) = " << ::max( d1, d2 ) << std::endl;
     

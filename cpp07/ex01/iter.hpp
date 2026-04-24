@@ -5,6 +5,16 @@
 #include <iostream>
 #include <string>
 
+/* 2 overloads to handle both const and non-const arrays, 
+since the function may accept either T& or const T&.
+
+We can't do 1 template because function pointer signatures differ (T& vs const T&), 
+and templates cannot deduce both cases safely with a single version.
+
+If we pass wrong function type it won’t compile, 
+because the function pointer type must match exactly.
+*/
+
 // NON-CONST array version
 template <typename T>
 void iter(T *array, const size_t length, void(*func)(T &)) {

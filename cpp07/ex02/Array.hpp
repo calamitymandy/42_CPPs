@@ -4,6 +4,16 @@
 #include <cstddef>
 #include <exception>
 
+/* We use new[] instead of malloc because new[] correctly calls constructors and destructors 
+for each element, which is required for complex types like std::string.
+
+If there is a negative index, it’s converted to unsigned, becoming a large value, 
+which is caught by the index >= _size check
+
+The assignment operator is safe because we allocate new memory first, 
+then replace the old one, ensuring strong exception safety.
+*/
+
 template <typename T>
 class Array {
     private:
@@ -32,18 +42,19 @@ class Array {
             for (unsigned int i = 0; i < _size; i++)
                 _data[i] = copy._data[i];
         }
+
         // Assignment operator
         Array &operator=(const Array &copy) {
             if (this == &copy)
                 return *this;
 
-            // Create a new array for the copy - Exception-safe assignment operator
+            // Create a new array for the copy 
             T *newData = NULL;
 
             if (copy._size > 0) {
                 newData = new T[copy._size]; // Deep copy → No shared memory. Safe even if allocation fails
-            for (unsigned int i = 0; i < copy._size; i++)
-                newData[i] = copy._data[i];
+                for (unsigned int i = 0; i < copy._size; i++)
+                    newData[i] = copy._data[i];
             }
 
             delete[] _data;

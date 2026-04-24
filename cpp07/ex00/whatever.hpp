@@ -6,7 +6,14 @@ swap must use `T &` Otherwise it won’t modify original variables
 `T` const &a` Avoids unnecessary copies 
 
 Subject says: if equal → return second parameter
-if a == b, condition is false → returns b (same for min & max)*/
+if a == b, condition is false → returns b (same for min & max)
+
+We use references in swap to modify the original variables instead of copies.
+We use const references in min/max to avoid unnecessary copies 
+and allow binding to const objects.
+We return by value because returning a reference could lead to dangling references 
+or unsafe behavior.
+*/
 
 template <typename T>
 void swap(T &a, T &b) {
