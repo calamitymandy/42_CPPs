@@ -28,7 +28,7 @@ int Span::shortestSpan() const {
 
     int shortest = sortedData[1] - sortedData[0];
     for (size_t i = 1; i < sortedData.size() -1; i++) {
-        int diff = sortedData[i +1] -sortedData[i];
+        int diff = sortedData[i +1] - sortedData[i];
         if (diff < shortest)
             shortest = diff;
     }
