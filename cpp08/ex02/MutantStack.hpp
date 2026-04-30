@@ -21,7 +21,8 @@ class MutantStack : public std::stack<T> {
         MutantStack() {}
         MutantStack(const MutantStack &copy) : std::stack<T>(copy) {}
         MutantStack &operator=(const MutantStack &copy) {
-            std::stack<T>::operator=(copy);
+            if (this != &copy)
+                std::stack<T>::operator=(copy);
             return *this;
         }
         ~MutantStack() {}
@@ -32,7 +33,7 @@ class MutantStack : public std::stack<T> {
         typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
         typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
-        typedef typename std::stack<T>::container_type::reverse_const_iterator reverse_const_iterator;
+        typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
         // Iterators & const iterators
         iterator begin() { return this->c.begin(); }
@@ -43,8 +44,8 @@ class MutantStack : public std::stack<T> {
         // Reverse iterators & const reverse iterators
         reverse_iterator rbegin() { return this->c.rbegin(); }
         reverse_iterator rend() { return this->c.rend(); }
-        reverse_const_iterator rbegin() const { return this->c.rbegin(); }
-        reverse_const_iterator rend() const { return this->c.rend(); }
+        const_reverse_iterator rbegin() const { return this->c.rbegin(); }
+        const_reverse_iterator rend() const { return this->c.rend(); }
 };
 
 #endif
