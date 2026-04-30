@@ -5,7 +5,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = find
 
-SRCS = main.cpp easyfind.cpp
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Colors
