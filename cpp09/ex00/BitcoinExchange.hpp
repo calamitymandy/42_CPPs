@@ -14,14 +14,15 @@ class BitcoinExchange {
         BitcoinExchange &operator=(const BitcoinExchange &copy);
         ~BitcoinExchange();
 
-        void loadData(const std::string &filename);
-        void processInput(const std::string &filename);
+        void    loadData(const std::string &filename);
+        void    processInput(const std::string &filename);
 
     private:
-        bool dateIsValid(const std::string &date) const;
-        bool valueIsValid(const std::string &value) const;
-        double stringToDouble(const std::string &str) const;
-        double getExchangeRate(const std::string &date) const;
+        double  stringToDouble(const std::string &str) const;
+        double  getExchangeRate(const std::string &date) const;
+        bool    dateIsValid(const std::string &date) const;
+        //bool    valueIsValid(const std::string &value) const;
+
 };
 
 #endif
