@@ -21,7 +21,6 @@ class BitcoinExchange {
         double  stringToDouble(const std::string &str) const;
         double  getExchangeRate(const std::string &date) const;
         bool    dateIsValid(const std::string &date) const;
-        //bool    valueIsValid(const std::string &value) const;
 
 };
 
