@@ -1,11 +1,11 @@
 # Test leaks MACOS:
-# leaks --atExit -- ./btc
+# leaks --atExit -- ./RPN
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = btc
+NAME = RPN
 
-SRCS = main.cpp BitcoinExchange.cpp
+SRCS = main.cpp RPN.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Colors
