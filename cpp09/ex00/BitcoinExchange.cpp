@@ -38,6 +38,9 @@ double BitcoinExchange::stringToDouble(const std::string &str) const {
 }
 
 // Get the exchange rate for a given date, throwing an exception if the date is not found
+
+// lower_bound(date) returns the first element whose key is not less than date.
+// If the exact date does not exist, decrement the iterator to get the closest lower date
 double BitcoinExchange::getExchangeRate(const std::string &date) const {
     std::map<std::string, double>::const_iterator it = _data.lower_bound(date);
     if (it == _data.end() || (it->first != date)) {
