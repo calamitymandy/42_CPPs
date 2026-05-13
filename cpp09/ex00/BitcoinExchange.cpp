@@ -14,26 +14,41 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy) {
 }
 BitcoinExchange::~BitcoinExchange() {}
 
+
+// trim whitespace from a string
+static void trim(std::string &s) {
+    const char *whitespace = " \t\n\r";
+    size_t start = s.find_first_not_of(whitespace);
+    size_t end = s.find_last_not_of(whitespace);
+    if (start == std::string::npos)
+        s.clear();
+    else
+        s = s.substr(start, end - start + 1);
+}
+
+// Convert a string to a double, throwing an exception if the conversion fails
 double BitcoinExchange::stringToDouble(const std::string &str) const {
-    std::stringstream strstr ;
+    std::stringstream strstr;
     double value;
-    strstr << str; // Insert the string into the stringstream
-    strstr >> value; // Extract the double value from the stringstream
+    strstr << str;
+    strstr >> value;
     if (strstr.fail() || !strstr.eof())
-        throw std::runtime_error("Error"); // If the conversion fails or there are extra characters, throw an error
+        throw std::runtime_error("Error: bad input => " + str);
     return value;
 }
 
+// Get the exchange rate for a given date, throwing an exception if the date is not found
 double BitcoinExchange::getExchangeRate(const std::string &date) const {
-    std::map<std::string, double>::const_iterator it = _data.lower_bound(date); // Find the first element that is not less than the given date
-    if (it == _data.end() || (it->first != date)) { // If the date is not found, we need to check the previous date
-        if (it == _data.begin()) // If the date is before the first entry in the map, we cannot find an exchange rate
+    std::map<std::string, double>::const_iterator it = _data.lower_bound(date);
+    if (it == _data.end() || (it->first != date)) {
+        if (it == _data.begin())
             throw std::runtime_error("Error: no valid date found.");
-        --it; // Move the iterator back to the previous date, which is the closest date before the given date
+        --it;
     }
-    return it->second; // Return the exchange rate for the found date
+    return it->second;
 }
 
+// Validate the date format (YYYY-MM-DD) and check if the year, month, and day are within valid ranges
 bool BitcoinExchange::dateIsValid(const std::string &date) const {
     // Implement date validation logic (e.g., check format YYYY-MM-DD)
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
@@ -64,13 +79,18 @@ bool BitcoinExchange::dateIsValid(const std::string &date) const {
     return true;
 }
 
+// Load exchange rate data from a CSV file, storing it in the _data map
 void BitcoinExchange::loadData(const std::string &filename) {
     std::ifstream file(filename.c_str());
     if (!file.is_open())
         throw std::runtime_error("Error: could not open file.");
 
     std::string line;
-    std::getline(file, line); // Skip header
+    
+    // Skip header
+    if (!std::getline(file, line) || line != "date,exchange_rate")
+    throw std::runtime_error("Error: bad database file.");
+
     while (std::getline(file, line)) {
         std::stringstream strstr(line);
         std::string date;
@@ -83,28 +103,39 @@ void BitcoinExchange::loadData(const std::string &filename) {
     }
 }
 
+// Process input from a file, validating the date and value, and calculating the exchange value based on the loaded data
 void BitcoinExchange::processInput(const std::string &filename) {
-    std::ifstream file(filename.c_str());
-    if (!file.is_open())
+    std::ifstream file(filename.c_str()); // c_str() converts the C++ string to a C-style string (const char*) which is required by the ifstream constructor
+    if (!file.is_open()) // is_open() checks if the file was successfully opened. If it returns false, it means the file could not be opened (e.g., it doesn't exist, or there are permission issues).
         throw std::runtime_error("Error: could not open file.");
 
     std::string line;
-    std::getline(file, line); // Skip header
+
+    // Skip header
+    if (!std::getline(file, line) || line != "date | value")
+    throw std::runtime_error("Error: bad input file.");
 
     while (std::getline(file, line)) {
-        // Process each line of the input file
-        std::stringstream strstr(line);
         std::string date;
         std::string valueStr;
-        if (!std::getline(strstr, date, '|') || !std::getline(strstr, valueStr)) {
+
+        // Determine the delimiter (either '|' or ',') and split the line into date and value
+        size_t delimPos = std::string::npos;
+        char delim = '\0';
+        if ((delimPos = line.find('|')) != std::string::npos)
+            delim = '|';
+        else if ((delimPos = line.find(',')) != std::string::npos)
+            delim = ',';
+
+        if (delim == '\0') {
             std::cout << "Error: bad input => " << line << std::endl;
-            continue; // Skip malformed lines
+            continue;
         }
-        // Trim whitespace
-        if (!date.empty() && date[date.length() - 1] == ' ')
-            date.erase(date.length() - 1);
-        if (!valueStr.empty() && valueStr[0] == ' ')
-            valueStr.erase(0, 1);
+
+        date = line.substr(0, delimPos);
+        valueStr = line.substr(delimPos + 1);
+        trim(date);
+        trim(valueStr);
 
         if (!dateIsValid(date)) {
             std::cout << "Error: bad input => " << line << std::endl;
@@ -125,9 +156,9 @@ void BitcoinExchange::processInput(const std::string &filename) {
 
             double rate = getExchangeRate(date);
             std::cout << date << " => " << value << " = " << value * rate << std::endl;
-        }
-        catch (...) {
-            std::cout << "Error: bad input => " << line << std::endl;
+        } 
+        catch (const std::exception &e) {
+            std::cout << e.what() << std::endl;
         }
     }
 }
