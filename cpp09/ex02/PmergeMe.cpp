@@ -53,7 +53,9 @@ void PmergeMe::parseInput(char **argv) {
 void PmergeMe::printBefore() const {
     std::cout << "Before: ";
     for (size_t i = 0; i < _vector.size(); i++) { // Both _vector and _deque contain the same elements, so we can use either to print the original sequence
-        std::cout << _vector[i] << " "; // Print each number followed by a space
+        std::cout << _vector[i];
+        if (i + 1 < _vector.size())
+            std::cout << " "; // Print each number followed by a space
     }
     std::cout << std::endl;
 }
@@ -62,7 +64,9 @@ void PmergeMe::printBefore() const {
 void PmergeMe::printAfter() const {
     std::cout << "After: ";
     for (size_t i = 0; i < _vector.size(); i++) { // Both _vector and _deque should be sorted at this point, so we can use either to print the sorted sequence
-        std::cout << _vector[i] << " "; // Print each number followed by a space
+        std::cout << _vector[i];
+        if (i + 1 < _vector.size())
+            std::cout << " "; // Print each number followed by a space
     }
     std::cout << std::endl;
 }
@@ -115,7 +119,7 @@ void PmergeMe::mergeInsertSortDeque(std::deque<int> &deq) {
 void PmergeMe::insertIntoSortedVector(std::vector<int> &vec) {
     for (size_t i = 1; i < vec.size(); i++) { // Start from the second element and iterate through the vector
         int key = vec[i];
-        int j = i - 1;
+        int j = static_cast<int>(i) - 1;
         while (j >= 0 && vec[j] > key) { // Move elements that are greater than key to one position ahead of their current position
             vec[j + 1] = vec[j]; // Shift the element at index j to index j + 1
             j--; // Move to the previous index
@@ -128,7 +132,7 @@ void PmergeMe::insertIntoSortedVector(std::vector<int> &vec) {
 void PmergeMe::insertIntoSortedDeque(std::deque<int> &deq) {
     for (size_t i = 1; i < deq.size(); i++) { // Start from the second element and iterate through the deque
         int key = deq[i];
-        int j = i - 1;
+        int j = static_cast<int>(i) - 1;
         while (j >= 0 && deq[j] > key) { // Move elements that are greater than key to one position ahead of their current position
             deq[j + 1] = deq[j]; // Shift the element at index j to index j + 1
             j--; // Move to the previous index
