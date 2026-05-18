@@ -33,7 +33,7 @@ int RPN::evaluate(const std::string &expression) {
     std::istringstream iss(expression);
     std::string token;
 
-    while (iss >> token) {
+    while (iss >> token) { // Read tokens from the input one by one. >> operator automatically skips whitespace and reads until the next whitespace, giving us individual tokens (numbers or operators).
         if (token.length() == 1 && std::isdigit(token[0])) { // Check if token is a single digit
             _stack.push(token[0] - '0'); // Convert char digit to int and push onto stack
         }
