@@ -1,7 +1,9 @@
 #include "RPN.hpp"
 #include <iostream>
 
-/* stack is ideal for RPN, because reverse Polish Notation works naturally with a stack. 
+/* Reverse Polish Notation example : a × (b + c) becomes: a b c + ×
+
+stack is ideal for reverse Polish Notation, because RPN works naturally with a stack. 
 RPN evaluation requires last-in-first-out behavior.
 
 Each number is pushed onto the stack, and each operator pops the last two operands, 
