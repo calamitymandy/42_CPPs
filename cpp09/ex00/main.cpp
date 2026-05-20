@@ -8,7 +8,7 @@ I used std::map<std::string, double> because the keys are automatically sorted b
 This allows me to efficiently find:
     - exact dates
     - or the closest lower date using lower_bound().
-A map also provides logarithmic insertion and lookup complexity:
+map also provides logarithmic insertion and lookup complexity:
 std::map is internally implemented as a balanced binary tree (usually a Red-Black Tree).
 So instead of checking every element one by one, it repeatedly cuts the search space roughly in half.
 */

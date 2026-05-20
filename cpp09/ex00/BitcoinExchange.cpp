@@ -39,8 +39,9 @@ double BitcoinExchange::stringToDouble(const std::string &str) const {
 
 // Get the exchange rate for a given date, throwing an exception if the date is not found
 
-// lower_bound(date) returns the first element whose key is not less than date.
+// lower_bound(date) returns the first element whose key is greater than or equal to the requested date.
 // If the exact date does not exist, decrement the iterator to get the closest lower date
+// In a map iterator, ->first is the key and ->second is the mapped value.
 double BitcoinExchange::getExchangeRate(const std::string &date) const {
     std::map<std::string, double>::const_iterator it = _data.lower_bound(date);
     if (it == _data.end() || (it->first != date)) {
@@ -53,11 +54,10 @@ double BitcoinExchange::getExchangeRate(const std::string &date) const {
 
 // Validate the date format (YYYY-MM-DD) and check if the year, month, and day are within valid ranges
 bool BitcoinExchange::dateIsValid(const std::string &date) const {
-    // Implement date validation logic (e.g., check format YYYY-MM-DD)
+    // check format YYYY-MM-DD
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
         return false;
     
-    // Checks for valid year, month, day can be added here
     int year, month, day;
 
     // Extract year from the first 4 characters of the date string
